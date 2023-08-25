@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\代码-Code",
+    "\\代码-Code\\指纹",
+    "\\代码-Code\\指纹\\AS608",
+    "\\代码-Code\\指纹\\SFW-V1.7\\SFM-V1.7",
+    "\\代码-Code\\指纹\\SFW-V1.7\\SFM-V1.7\\examples"
   ],
+  "SelectedNode": "\\代码-Code\\指纹\\AS608\\Touch_and_unlock",
   "PreviewInSolutionExplorer": false
 }
