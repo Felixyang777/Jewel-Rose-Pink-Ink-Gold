@@ -1,16 +1,25 @@
+  ///////////////
+ /*fingerprint*/
+///////////////
 #include <Adafruit_Fingerprint.h>
-
 SoftwareSerial mySerial(2, 3);  // RX,TX(UNO)
-
-
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
-
 uint8_t id;
 
+
+  /////////
+ /*servo*/
+/////////
+#include <Servo.h>  
+int pos = 0;
+Servo myservo;
+
+
 void setup() {
+     myservo.attach(10); 
+
     Serial.begin(9600);
-    while (!Serial)
-        ;  // For Yun/Leo/Micro/Zero/...
+    while (!Serial) ; 
     delay(100);
     Serial.println("\n\nAdafruit Fingerprint sensor enrollment");
 
@@ -18,10 +27,10 @@ void setup() {
     finger.begin(57600);
 
     if (finger.verifyPassword()) {
-        Serial.println("Found fingerprint sensor!");
+        Serial.println("Found fingerprint sensor! :) ");
     }
     else {
-        Serial.println("Did not find fingerprint sensor :(");
+        Serial.println("Did not find fingerprint sensor  :( ");
         while (1) { delay(1); }
     }
 }
@@ -39,7 +48,9 @@ uint8_t readnumber(void) {
 
 void loop()  // run over and over again
 {
-    getFingerprintIDez();
+    getFingerprintID();
+    delay(50);  //don't ned to run this at full speed.
+    InsertionDetection();
     delay(50);  //don't ned to run this at full speed.
 }
 
@@ -111,24 +122,18 @@ uint8_t getFingerprintID() {
     Serial.print(" with confidence of ");
     Serial.println(finger.confidence);
 
+    if(pos == 0)
+    {
+        for (pos = 0; pos <= 90; pos += 1)
+        {
+		    myservo.write(pos);
+	    }
+	    delay(1000);
+    }
     return finger.fingerID;
 }
 
-// returns -1 if failed, otherwise returns ID #
-int getFingerprintIDez() {
-    uint8_t p = finger.getImage();
-    if (p != FINGERPRINT_OK) return -1;
 
-    p = finger.image2Tz();
-    if (p != FINGERPRINT_OK) return -1;
-
-    p = finger.fingerFastSearch();
-    if (p != FINGERPRINT_OK) return -1;
-
-    // found a match!
-    Serial.print("Found ID #");
-    Serial.print(finger.fingerID);
-    Serial.print(" with confidence of ");
-    Serial.println(finger.confidence);
-    return finger.fingerID;
+void InsertionDetection()
+{
 }
