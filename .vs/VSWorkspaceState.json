@@ -2,11 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\代码-Code",
+    "\\代码-Code\\Jewel-Rose-Pink-Ink-Gold",
+    "\\代码-Code\\Jewel-Rose-Pink-Ink-Gold\\Jewel-Rose-Pink-Ink-Gold",
     "\\代码-Code\\指纹",
-    "\\代码-Code\\指纹\\AS608",
-    "\\代码-Code\\指纹\\SFW-V1.7\\SFM-V1.7",
-    "\\代码-Code\\指纹\\SFW-V1.7\\SFM-V1.7\\examples"
+    "\\代码-Code\\红外传感器",
+    "\\代码-Code\\红外传感器\\ TCRT5000",
+    "\\代码-Code\\红外传感器\\ TCRT5000\\TCRT5000"
   ],
-  "SelectedNode": "\\代码-Code\\指纹\\AS608\\Touch_and_unlock",
+  "SelectedNode": "\\代码-Code\\Jewel-Rose-Pink-Ink-Gold\\Jewel-Rose-Pink-Ink-Gold\\Jewel-Rose-Pink-Ink-Gold.ino",
   "PreviewInSolutionExplorer": false
 }
