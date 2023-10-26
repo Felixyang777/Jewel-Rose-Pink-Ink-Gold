@@ -1,14 +1,18 @@
   ////////////
  /*TCRT5000*/
 ////////////
-int InfraredRangingPin = 7;  //定义数字检测接口7号引脚
+int InfraredRangingPin = 8;  //定义数字检测接口7号引脚
+int InfraredRangingGND = 7 ;
+int InfraredRangingVCC = 6 ;
 int val;                     //定义变量
 
   ///////////////
  /*fingerprint*/
 ///////////////
 #include <Adafruit_Fingerprint.h>
-SoftwareSerial mySerial(2, 3);  // RX,TX(UNO)
+int FingerprintVCC = 2 ;
+SoftwareSerial mySerial(3, 4);  // RX,TX(UNO)
+int FingerprintGND = 5 ;
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 uint8_t id;  //定义id
 
@@ -18,13 +22,29 @@ uint8_t id;  //定义id
 /////////
 #include <Servo.h>
 Servo myservo;      // 创建舵机对象
-int ServoPin = 10;  // 定义数字检测接口10号引脚
+int ServoGND = 9 ;
+int ServoVCC = 10 ;
+int ServoPin = 11;  // 定义数字检测接口10号引脚
 int pos = 0;        // 舵机位置
 int speed = 6;      // 舵机速度
 
 void setup() {
   myservo.attach(ServoPin);            // 将舵机连接到10号引脚的舵机对象
+  pinMode(ServoGND, OUTPUT); 
+  digitalWrite(ServoGND,LOW);
+  pinMode(ServoVCC, OUTPUT);  
+  digitalWrite(ServoVCC,HIGH);
+
   pinMode(InfraredRangingPin, INPUT);  // 红外寻迹连接引脚D2，并设置为输入模式
+  pinMode(InfraredRangingGND, OUTPUT); 
+  digitalWrite(InfraredRangingGND,LOW);
+  pinMode(InfraredRangingVCC, OUTPUT);  
+  digitalWrite(InfraredRangingVCC,HIGH);
+
+  pinMode(FingerprintGND, OUTPUT); 
+  digitalWrite(FingerprintGND,LOW);
+  pinMode(FingerprintVCC, OUTPUT);  
+  digitalWrite(FingerprintVCC,HIGH);
   Serial.begin(9600);                  // 串口波特率为9600kbps
   while (!Serial)
     ;
@@ -44,7 +64,7 @@ void setup() {
 
 void loop() {
   val = digitalRead(InfraredRangingPin);  //读取数字接口的值
-  // Serial.println(val);                                    //输出输出接口的值(已注释)
+ //Serial.println(val);                                    //输出输出接口的值(已注释)
   getFingerprintID();  //调用
 
   if (val != 1 && pos > 45) {           // 如果为低电平则开转
